@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 20px/1.6 'Montserrat', sans-serif;
+}
+
+.main-block {
+    background: url('../img/header-bg.png') no-repeat fixed;
+    background-size: cover;
+    height: 1040px;
+}
+
+.top-header {
+    padding: 0 5%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 1px 5px rgba(255, 255, 255, .2);
+}
+
+.logo {
+    float: left;
+    max-height: 80px;
+    margin-right: 20px;
+}
+
+.text-logo {
+    float: left;
+    font-size: 36px;
+    font-weight: bolder;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    flex-wrap: nowrap;
+    padding-top: 25px;
+    padding-left: 5%;
+}
+
+.menu-elem {
+    margin-right: 10%;
+    position: relative;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.nav-menu a:hover {
+    color: rgb(64, 153, 61);
+}
+
+.nav-menu a:hover:after {
+    content: '';
+    display: block;
+    width: 75%;
+    border-bottom: 2px solid rgb(64, 153, 61);
+}
