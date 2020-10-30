@@ -1,0 +1,50 @@
+<?php
+
+
+namespace app\core;
+
+
+class Router
+{
+    protected $routes = [];
+    protected $params = [];
+
+    public function __construct()
+    {
+        $array = require('app/config/routes.php');
+        foreach($array as $key=>$val) {
+            $this->add($key, $val);
+
+        }
+    }
+    public function add($route, $params) {
+        $route = preg_replace('/{([a-z]+):([^\}]+)}/', '(?P<\1>\2)', $route);
+        $route = '#^'.$route.'$#';
+        $this->routes[$route] = $params;
+    }
+
+    public function match()
+    {
+        $url = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+        foreach ($this->routes as $route => $params) {
+            if (preg_match($route, $url, $matches)) {
+                $this->params = $params;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function run()
+    {
+        if($this->match()) {
+            echo 'Маршрут найден ';
+            $controller = 'app\controllers\\'.ucfirst($this->params['controller'].'Controller.php');
+            echo $controller;
+        }
+        else {
+            echo 'Маршрут не найден';
+        }
+
+    }
+}
