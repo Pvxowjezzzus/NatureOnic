@@ -2,7 +2,7 @@
 return [
     ''=> [
     'controller' => 'main',
-    'action' => 'main'
+    'action' => 'index'
     ],
     'fruits'=> [
         'controller' => 'main',

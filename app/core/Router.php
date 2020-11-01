@@ -2,6 +2,7 @@
 
 
 namespace app\core;
+use app\core\View;
 
 
 class Router
@@ -18,7 +19,6 @@ class Router
         }
     }
     public function add($route, $params) {
-        $route = preg_replace('/{([a-z]+):([^\}]+)}/', '(?P<\1>\2)', $route);
         $route = '#^'.$route.'$#';
         $this->routes[$route] = $params;
     }
@@ -38,13 +38,23 @@ class Router
     public function run()
     {
         if($this->match()) {
-            echo 'Маршрут найден ';
-            $controller = 'app\controllers\\'.ucfirst($this->params['controller'].'Controller.php');
-            echo $controller;
+            $path = 'app\controllers\\'.ucfirst($this->params['controller'].'Controller');
+            if(class_exists($path)) {
+                $action = $this->params['action'].'Action';
+                if(method_exists($path, $action)) {
+                    $controller = new $path($this->params);
+                    $controller->$action();
+                }
+                else {
+                    View::ErrorStatus(404);
+                }
+            }
+            else {
+                View::ErrorStatus(404);
+            }
         }
         else {
-            echo 'Маршрут не найден';
+            View::ErrorStatus(404);
         }
-
     }
 }

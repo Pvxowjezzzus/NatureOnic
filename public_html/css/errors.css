@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+#file_not_found {
+    height: 100vh;
+    background: linear-gradient(rgba(34, 104, 163, 0.8), rgba(0,0,0,1)), url("../img/1.jpg") no-repeat;
+    background-size: cover;
+    padding: 20%;
+    text-align: center;
+}
+.back-btn {
+    display: inline;
+    outline: white;
+    transition: 0.5s;
+}
+.back-btn:hover {
+    color: rgb(78, 128, 148);
+}
