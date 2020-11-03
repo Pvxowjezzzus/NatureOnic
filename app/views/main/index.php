@@ -46,10 +46,10 @@
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <img src="/public_html/img/13.jpg">
+                            <a href="/fruits"><img src="/public_html/img/13.jpg"></a>
                         </div>
                         <div class="portfolio-item__title">
-                            <h3><a href="fruits.html">Фрукты</a></h3>
+                            <h3><a href="/fruits">Фрукты</a></h3>
                         </div>
                         <div class="portfolio-item__text">
                             <p>Фру́кт — сочный съедобный плод растения. Фрукты являются важной составляющей пищи человека и многих животных.</p>
