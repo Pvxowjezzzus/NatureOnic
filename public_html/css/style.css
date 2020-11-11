@@ -469,22 +469,19 @@ label, a{ /*при наведении на стрелки или переклю�
 .row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    word-break: break-word;
     width: 1140px;
 
 }
-.row:after{
-    clear: both;
-    content: "";
-    display: table;
-}
+
 .onecol1 {
-    width: 360px;
-    margin-right: 30px;
+    width: 350px;
+    margin-right: 2%;
     float: left; 
 }
-.onecol1:last-child{
-    margin-right: 0px;
-}
+
 /* ----------footer---------*/
 
 .footer{

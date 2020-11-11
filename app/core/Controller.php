@@ -9,15 +9,16 @@ abstract class Controller
     public $view;
     public $route;
     public $model;
-    public $acl;
+    protected $acl = [];
     public function __construct($route)
     {
         $this->route = $route;
-        $this->view = new View($route);
         $this->model = $this->LoadModel($route['controller']);
         if(!$this->checkACL()) {
-           View::ErrorStatus(403);
+            View::ErrorStatus(403);
         }
+        $this->view = new View($route);
+
 
     }
 
@@ -30,16 +31,23 @@ abstract class Controller
 
     public function checkACL()
     {
-        $this->acl = require 'app/ACL/'.$this->route['controller'].'.php';
-        if($this->isACL('all')) {
+        $this->acl = require 'app/ACL/acl.php';
+        if ($this->isAcl('all')) {
             return true;
         }
+        elseif ($this->isACL('login/admin') && $this->model->ipList() && !isset($_SESSION['admin'])) {
+            return true;
+        }
+        elseif ($this->isACL('admin') && $this->model->ipList() && isset($_SESSION['admin'])) {
+            return true;
+        }
+
 
         return false;
     }
 
     public function isACL($key)
     {
-        return in_array($this->route['action'], $this->acl[$key]);
+        return in_array($this->route['action'], $this->acl[$key], true);
     }
 }

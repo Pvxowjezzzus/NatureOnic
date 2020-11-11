@@ -19,6 +19,7 @@ class Router
         }
     }
     public function add($route, $params) {
+        $route = preg_replace('/{([a-z]+):([^\}]+)}/', '(?P<\1>\2)', $route);
         $route = '#^'.$route.'$#';
         $this->routes[$route] = $params;
     }
@@ -28,6 +29,9 @@ class Router
         $url = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         foreach ($this->routes as $route => $params) {
             if (preg_match($route, $url, $matches)) {
+                foreach ($matches as $key => $match) {
+                        $params[$key] = $match;
+                }
                 $this->params = $params;
                 return true;
             }

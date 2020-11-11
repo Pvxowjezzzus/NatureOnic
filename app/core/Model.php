@@ -8,9 +8,15 @@ abstract class Model
 {
 public $db;
 
-public function __construct()
-{
-    $this->db = new Db();
+    public function __construct()
+    {
+        $this->db = new Db();
 
-}
+    }
+
+
+    public function pure($str)
+    {
+        return trim(htmlentities($str, ENT_QUOTES, "UTF-8"));
+    }
 }

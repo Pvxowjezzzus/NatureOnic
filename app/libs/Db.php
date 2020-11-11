@@ -11,9 +11,7 @@ protected $db;
     {
         $config = require 'app/config/db.php';
         try {
-            $this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['name'] . '', $config['user'], $config['password'], array(
-                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8",
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            $this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' .$config['name']. ';charset=utf8', $config['user'], $config['password'], array(
                 PDO::ATTR_ERRMODE => TRUE
             ));
 
@@ -50,5 +48,8 @@ protected $db;
 
     public function lastInsertId() {
         return $this->db->lastInsertId();
+    }
+    public function quote($str) {
+        return $this->db->quote($str);
     }
 }

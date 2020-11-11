@@ -1,13 +1,9 @@
-<section class="portf">
-    <div class="portfolio">
-        <div class="container">
-
+<div class="container">
             <div class="title">Фрукты</div>
 
             <div class="row">
                 <?php if (!empty($fruits)): ?>
-                <?php foreach ($fruits as $fruit):
-                       ?>
+                <?php foreach ($fruits as $fruit):?>
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">

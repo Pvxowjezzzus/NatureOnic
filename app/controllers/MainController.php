@@ -8,7 +8,6 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-
         $this->view->render('ООО Натуроник');
     }
 
@@ -19,5 +18,21 @@ class MainController extends Controller
         ];
 
         $this->view->render('Фрукты', $vars);
+    }
+    public function vegiesAction()
+    {
+        $vars = [
+            'vegies' => $this->model->showItems($this->route),
+        ];
+
+        $this->view->render('Овощи', $vars);
+    }
+    public function nutsAction()
+    {
+        $vars = [
+            'nuts' => $this->model->showItems($this->route),
+        ];
+
+        $this->view->render('Орехи', $vars);
     }
 }

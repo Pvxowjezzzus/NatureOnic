@@ -32,10 +32,10 @@
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <img src="/public_html/img/12.jpg">
+                            <a href="/vegies"><img src="/public_html/img/12.jpg" alt="овощи"></a>
                         </div>
                         <div class="portfolio-item__title">
-                            <h3><a href="vegetables.html">Овощи</a></h3>
+                            <h3><a href="/vegies">Овощи</a></h3>
                         </div>
                         <div class="portfolio-item__text">
                             <p>О́вощи — кулинарный термин, обозначающий съедобную часть некоторых растений, а также всякую твёрдую растительную пищу.</p>
@@ -59,10 +59,10 @@
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <img src="/public_html/img/14.jpg">
+                            <a href="/fruits"><img src="/public_html/img/14.jpg"></a>
                         </div>
                         <div class="portfolio-item__title">
-                            <h3><a href="nuts.html">Орехи</a></h3>
+                            <h3><a href="/nuts">Орехи</a></h3>
                         </div>
                         <div class="portfolio-item__text">
                             <p>Оре́х — плод некоторых растений, как правило, со съедобным ядром и твёрдой скорлупой.</p>
