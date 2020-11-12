@@ -4,6 +4,7 @@ return [
         'index',
         'fruits',
         'vegies',
+        'nuts',
 
     ],
     'login/admin' => [

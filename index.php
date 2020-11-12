@@ -18,7 +18,11 @@ function startSession($isUserActivity=true) {
 
         if ( isset($_SESSION['lastactivity']) && $t-$_SESSION['lastactivity'] >= $sessionLifetime ) {
             destroySession();
-            exit(header( "Refresh:0 url=/admin/login"));
+                $url = parse_url($_SERVER['REQUEST_URI']);
+                if($url['path'] === '/admin-panel' || $url['path'] === "/admin/" ) {
+                    exit(header( "Refresh:0 url=/admin/login"));
+                }
+
         }
         else {
             if ( $isUserActivity ) $_SESSION['lastactivity'] = $t;

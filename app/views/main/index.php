@@ -59,7 +59,7 @@
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <a href="/fruits"><img src="/public_html/img/14.jpg"></a>
+                            <a href="/nuts"><img src="/public_html/img/14.jpg"></a>
                         </div>
                         <div class="portfolio-item__title">
                             <h3><a href="/nuts">Орехи</a></h3>

@@ -52,7 +52,7 @@ class AdminController extends Controller
     public function itemAddAction()
     {
         if (!empty($_POST)) {
-            if(!$this->model->postValid($_POST, 'createArticle')) {
+            if(!$this->model->postValid($_POST, 'add')) {
 
                 exit($this->view->message(http_response_code(400), $this->model->error));
             }

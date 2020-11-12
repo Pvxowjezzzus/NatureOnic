@@ -45,6 +45,77 @@ h2{
     margin-left: auto;
     margin-right: auto;
 }
+.tomain-btn {
+    display: inline-block;
+    border: none;
+    background: #66799b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 1em;
+    margin-top: 10px;
+}
+.page-container {
+    padding: 1rem;
+    margin: 3rem auto;
+    border-radius: 0.2rem;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3);
+    counter-reset: pagination;
+    text-align: center;
+    width: fit-content;
+}
+.page-container:after {
+     clear: both;
+     content: "";
+     display: table;
+ }
+
+.page-container ul,
+.page-container li {
+    list-style: none;
+    display: inline;
+    padding-left: 0px;
+}
+
+.page-container li {
+    margin-right: 10px;
+}
+.page-container li:hover a {
+    color: #fdfdfd;
+    background-color: #1d1f20;
+    border: solid 1px #1d1f20;
+}
+
+.page-container li:first-child {
+    float: left;
+}
+
+
+.page-container li:last-child {
+    float: right;
+    margin-right: 0;
+}
+
+.page-container li a {
+    border: solid 1px #d7d7d7;
+    border-radius: 0.2rem;
+    color: #7d7d7d;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    padding: 0.5rem 0.9rem;
+}
+.page-container li span {
+    border: 1px cornflowerblue solid;
+    border-radius: 0.2rem;
+    color: cornflowerblue;
+    display: inline-block;
+    text-align: center;
+    padding: 0.5rem 0.9rem;
+}
+
+
+
 .row {
     display: flex;
     justify-content: space-between;
@@ -178,7 +249,7 @@ section.portf {
     padding-bottom: 10px;
 }
 .portfolio-item{
-margin-bottom: 40px;
+margin-bottom: 50px;
 }
 .title{
     font-size: 34px;
@@ -469,7 +540,6 @@ label, a{ /*при наведении на стрелки или переклю�
 .row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     flex-wrap: wrap;
     word-break: break-word;
     width: 1140px;

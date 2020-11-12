@@ -8,6 +8,10 @@ return [
         'controller' => 'main',
         'action' => 'fruits'
     ],
+    'fruits/{page:\d+}'=> [
+        'controller' => 'main',
+        'action' => 'fruits'
+    ],
     'vegies'=> [
         'controller' => 'main',
         'action' => 'vegies'

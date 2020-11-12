@@ -7,7 +7,7 @@ namespace app\models;
 use app\core\Model;
 use app\core\Controller;
 use app\core\View;
-use app\libs\Imagick;
+use app\libs\Images;
 
 class Admin extends Model
 {
@@ -51,7 +51,7 @@ class Admin extends Model
     }
 
 
-    public function postValid($post) {
+    public function postValid($post, $type) {
         $namelen = iconv_strlen($post['name']);
         $desclen = iconv_strlen($post['description']);
         if(empty($post['item-cat'])) {
@@ -81,25 +81,53 @@ class Admin extends Model
             $this->error = 'Поле "Страна-производитель" не заполнено';
             return false;
         }
-        if(empty($_FILES['image']['tmp_name'])){
+        if(empty($_FILES['image']['tmp_name']) && $type == "add"){
             $this->error = 'Изображение не выбрано';
+            return false;
+        }
+
+        $allowedtypes = ['image/gif','image/jpeg', 'image/jpg', 'image/png'];
+        if(!in_array($_FILES["image"]["type"], $allowedtypes)) {
+            $this->error = 'Запрещенный тип файла';
             return false;
         }
         return true;
     }
+    public function uploadImage($part)
+    {
+        $path = "public_html".$part;
+        static $randStr = '0123456789abcdefghijklmnopqrstuvwxyz';
+        $randname = '';
+        for ($i = 0; $i < 10; $i++) {
+            $key = rand(0, strlen($randStr) - 1);
+            $randname .= $randStr[$key];
+        }
+        $uploadImage = $_FILES['image'];
+        $uploadImageName = trim(strip_tags($uploadImage['name']));
+        $extension = pathinfo($uploadImageName, PATHINFO_EXTENSION);
+        $file = $randname.'.'.$extension;
+        if (!move_uploaded_file($_FILES['image']['tmp_name'], "$path$file")) {
+            $this->error = 'Ошибка загрузки изображения';
+            return false;
+
+        } else
+            $size = GetImageSize("$path$file");
+        if ($size[0] > 360 || $size[1] > 240) {
+            $image = new Images();
+            $image->load("$path$file");
+            $image->resize(360, 240);
+            $image->save("$path$file");
+        }
+        return "$path$file";
+    }
 
     public function AddItem($post) {
-        if(!array_key_exists($post['item-cat'], $this->cats)) {
-            $this->error = 'Ошибка SQL-запроса';
-            return false;
-        }
-
         $params = [
             'id' => null,
             'name' => $this->pure($post['name']),
             'text' => $this->pure($post['description']),
             'country'=>$this->pure($post['country']),
-            'images' => 'null',
+            'images' =>    $this->uploadImage("/content/images/"),
             'created_at' => date("Y-m-d H:i:s"),
 
         ];
@@ -113,6 +141,7 @@ class Admin extends Model
     }
     public function DeleteItem($cat, $id)
     {
+        unlink($this->db->column("SELECT image FROM ".$cat." WHERE id = ".$id." "));
         return $this->db->query("DELETE FROM ".$cat." WHERE id = ".$id." ");
     }
 

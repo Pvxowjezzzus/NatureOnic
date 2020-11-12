@@ -11,7 +11,7 @@
                 <input type='text' name='name' placeholder="Название продукта" autocomplete="off">
                 <textarea placeholder="Описание продукта" rows="5" name="description"></textarea>
                 <input type='text' name="country" placeholder="Страна-производитель">
-                <input type="file" name='image' accept='.png, .jpg, .jpeg' value='Загрузить изображение'>
+                <input type="file" name='image' accept='image/jpeg,image/png,image/gif,image/jpg' value='Загрузить изображение'>
                 <input type='submit' value="Добавить товар">
             </form>
 <script  src='/public_html/scripts/form.js'></script>
