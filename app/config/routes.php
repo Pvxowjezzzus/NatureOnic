@@ -4,22 +4,31 @@ return [
     'controller' => 'main',
     'action' => 'index'
     ],
-    'fruits'=> [
+    'stuff/{cat:\w+}'=> [
         'controller' => 'main',
-        'action' => 'fruits'
+        'action' => 'stuff'
     ],
-    'fruits/{page:\d+}'=> [
+    'stuff/{cat:\w+}/{page:\d+}'=> [
         'controller' => 'main',
-        'action' => 'fruits'
+        'action' => 'stuff'
     ],
-    'vegies'=> [
-        'controller' => 'main',
-        'action' => 'vegies'
-    ],
-    'nuts'=> [
-        'controller' => 'main',
-        'action' => 'nuts'
-    ],
+//    'vegies'=> [
+//        'controller' => 'main',
+//        'action' => 'vegies'
+//    ],
+//
+//    'vegies/{page:\d+}'=> [
+//        'controller' => 'main',
+//        'action' => 'vegies'
+//    ],
+//    'nuts'=> [
+//        'controller' => 'main',
+//        'action' => 'nuts'
+//    ],
+//    'nuts/{page:\d+}'=> [
+//        'controller' => 'main',
+//        'action' => 'nuts'
+//    ],
     'admin/login' => [
         'controller' => 'admin',
         'action' => 'auth'
@@ -41,8 +50,17 @@ return [
         'controller' => 'admin',
         'action' => 'itemAdd',
     ],
+    'admin/items/types/add' => [
+        'controller' => 'admin',
+        'action' => 'typeAdd',
+    ],
     'admin/items/delete/{cat:\w+}/{id:\d+}' => [
         'controller' => 'admin',
         'action' => 'itemDelete',
+    ],
+    'admin/items/edit/{cat:\w+}/{id:\d+}' => [
+        'controller' => 'admin',
+        'action' => 'itemEdit',
     ]
+
 ];

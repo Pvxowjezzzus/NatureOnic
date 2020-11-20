@@ -44,13 +44,17 @@ class AdminController extends Controller
     {
         $vars = [
             'title'=>$this->model->items_title($_GET),
-            'items'=>$this->model->Items(),
+            'items'=>$this->model->Items('all',''),
         ];
         $this->view->render('Продукты',$vars);
     }
 
     public function itemAddAction()
     {
+        if(!empty($_GET)) {
+            $this->model->types($_GET);
+        }
+
         if (!empty($_POST)) {
             if(!$this->model->postValid($_POST, 'add')) {
 
@@ -61,7 +65,7 @@ class AdminController extends Controller
             if(!$id) {
                 exit($this->view->message(http_response_code(400), 'Ошибка отправки запроса!'));
             }
-            $this->view->message(http_response_code(200),'Продукт успешно добавлен!');
+            $this->view->message('added','Продукт успешно добавлен!');
         }
         $this->view->render('Добавление продукта');
     }
@@ -75,6 +79,47 @@ class AdminController extends Controller
         $this->model->DeleteItem($this->route['cat'], $this->route['id']);
         $this->view->redirect("admin/items?cat=".$this->route['cat']);
 
+    }
+
+    public function itemEditAction()
+    {
+        if(!$this->model->ItemExists($this->route['cat'], $this->route['id'])) {
+            View::ErrorStatus(404);
+        }
+        if (!empty($_POST)) {
+            if(!$this->model->postValid($_POST, 'edit')) {
+
+                exit($this->view->message(http_response_code(400), $this->model->error));
+            }
+
+            $id = $this->model->EditItem($_POST, $this->route);
+            if(!$id) {
+                exit($this->view->message(http_response_code(400), 'Ошибка отправки запроса!'));
+            }
+            $this->view->message(http_response_code(200),'Данные продукта обновлены!');
+        }
+        $vars = [
+        'item' => $this->model->Items('single',$this->route),
+        'url' => "/admin/items/edit/".$this->route['cat']."/".$this->route['id'],
+        'cat' => $this->route['cat'],
+    ];
+        $this->view->render("Редактирование", $vars);
+    }
+
+    public function typeAddAction()
+    {
+        if (!empty($_POST)) {
+            if (!$this->model->typeValid($_POST)) {
+
+                exit($this->view->message(http_response_code(400), $this->model->error));
+            }
+            $id = $this->model->AddType($_POST);
+            if(!$id) {
+                exit($this->view->message(http_response_code(400), 'Ошибка отправки запроса!'));
+            }
+            $this->view->message(http_response_code(200),'Фильтр успешно добавлен!');
+        }
+        $this->view->render("Добавление фильтра");
     }
 
 }

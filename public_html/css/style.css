@@ -38,7 +38,12 @@ h2{
 	font-family: 'Montserrat:200', sans-serif;
 	font-weight: 400; 
 }
-
+a {
+    text-decoration: none;
+}
+.empty-msg {
+    margin: 20px 0;
+}
 /* grid */
 .container {
     width: 1140px;
@@ -118,8 +123,9 @@ h2{
 
 .row {
     display: flex;
-    justify-content: space-between;
-    width: 1140px;
+    justify-content: center;
+    flex-wrap: wrap;
+    word-break: break-word;
 }
 .row:after{
     clear: both;
@@ -278,18 +284,8 @@ margin-bottom: 50px;
     color:#0052C2;
     border-color: rgba(0, 82, 194, 0.3);
 }
-.portfolio-item__text p{
-    margin-top: 0px;
-    margin-bottom: 15px;
-}
-.portfolio-item__textt p{
-    margin-top: 0px;
-    margin-bottom: 100px;
-}
-.portfolio-item__texttt p{
-    margin-top: 0px;
-    margin-bottom: 100px;
-}
+
+
 /*..................................
 podval
 ......................................*/
@@ -537,14 +533,7 @@ label, a{ /*при наведении на стрелки или переклю�
 #controls label{ /*прозрачность стрелок при отводе курсора*/
 	transition: opacity 0.2s ease-out;
 }
-.row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    word-break: break-word;
-    width: 1140px;
 
-}
 
 .onecol1 {
     width: 350px;
@@ -620,4 +609,47 @@ p.footer__social-icons a:hover{
         padding-top: 70px;
         padding-bottom: 60px;
     }
+}
+
+.sort {
+    margin: 25px 0;
+}
+.sort a {
+    display: inline-block;
+    color: #000;
+    transition: all .2s;
+}
+
+.sort a:hover {
+    color: #66799b;
+}
+ .sort i {
+     margin-left: 5px;
+     white-space: nowrap;
+     display: none;
+}
+ .arrow-asc {
+     display: inline-block !important;
+ }
+.arrow-desc {
+    display: inline-block !important;
+    transform: rotate(180deg);
+}
+.filters {
+    width: fit-content;
+    margin-left: auto;
+    display: block;
+}
+.types {
+    display: inline-block;
+    margin-right: 10px;
+    background: #f1f1f1;
+    padding: 3px;
+    border-radius: 3px;
+    color: #000;
+    transition: .5s;
+}
+.types:hover {
+    transform: scale(0.9);
+    background: #bbbbbb;
 }

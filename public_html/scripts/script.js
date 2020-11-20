@@ -1,6 +1,6 @@
 
-window.addEventListener("load",function()  {
-
-   history.pushState("", document.title, window.location.pathname);
+window.addEventListener("load",function(e)  {
+   e.preventDefault();
+   window.location.hash = '';
 
 });

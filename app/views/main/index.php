@@ -32,10 +32,10 @@
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <a href="/vegies"><img src="/public_html/img/12.jpg" alt="овощи"></a>
+                            <a href="/stuff/vegies"><img src="/public_html/img/12.jpg" alt="овощи"></a>
                         </div>
                         <div class="portfolio-item__title">
-                            <h3><a href="/vegies">Овощи</a></h3>
+                            <h3><a href="/stuff/vegies">Овощи</a></h3>
                         </div>
                         <div class="portfolio-item__text">
                             <p>О́вощи — кулинарный термин, обозначающий съедобную часть некоторых растений, а также всякую твёрдую растительную пищу.</p>
@@ -46,10 +46,10 @@
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <a href="/fruits"><img src="/public_html/img/13.jpg"></a>
+                            <a href="/stuff/fruits"><img src="/public_html/img/13.jpg"></a>
                         </div>
                         <div class="portfolio-item__title">
-                            <h3><a href="/fruits">Фрукты</a></h3>
+                            <h3><a href="/stuff/fruits">Фрукты</a></h3>
                         </div>
                         <div class="portfolio-item__text">
                             <p>Фру́кт — сочный съедобный плод растения. Фрукты являются важной составляющей пищи человека и многих животных.</p>
@@ -59,13 +59,39 @@
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <a href="/nuts"><img src="/public_html/img/14.jpg"></a>
+                            <a href="/stuff/nuts"><img src="/public_html/img/14.jpg"></a>
                         </div>
                         <div class="portfolio-item__title">
-                            <h3><a href="/nuts">Орехи</a></h3>
+                            <h3><a href="/stuff/nuts">Орехи</a></h3>
                         </div>
                         <div class="portfolio-item__text">
                             <p>Оре́х — плод некоторых растений, как правило, со съедобным ядром и твёрдой скорлупой.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="onecol1">
+                    <div class="portfolio-item">
+                        <div class="portfolio-item__png">
+                            <a href="/stuff/berries"><img src="/public_html/img/13.jpg"></a>
+                        </div>
+                        <div class="portfolio-item__title">
+                            <h3><a href="/stuff/berries">Ягоды (поменять src img)</a></h3>
+                        </div>
+                        <div class="portfolio-item__text">
+                            <p>Фру́кт — сочный съедобный плод растения. Фрукты являются важной составляющей пищи человека и многих животных.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="onecol1">
+                    <div class="portfolio-item">
+                        <div class="portfolio-item__png">
+                            <a href="/stuff/shrooms"><img src="/public_html/img/13.jpg"></a>
+                        </div>
+                        <div class="portfolio-item__title">
+                            <h3><a href="/stuff/shrooms">Грибы(поменять src img)</a></h3>
+                        </div>
+                        <div class="portfolio-item__text">
+                            <p>Фру́кт — сочный съедобный плод растения. Фрукты являются важной составляющей пищи человека и многих животных.</p>
                         </div>
                     </div>
                 </div>

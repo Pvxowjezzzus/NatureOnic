@@ -1,17 +1,28 @@
 <form class="form"  action="/admin/items/add" id='add-item' method="post">
                 <h3>Добавление продукта</h3>
-                <p>Выберите категорию</p>
-                <select name="item-cat" id="item-cat" form="add-item">
+                <p>Выберите категорию продукта</p>
+                <select id="item-cat" form="add-item" onchange="slide_select('types', this), get_values(this, null, null)">
                     <option value="">-</option>
                     <option value="fruits">Фрукты</option>
-                    <option value="vegies"">Овощи</option>
+                    <option value="vegies">Овощи</option>
                     <option value="nuts">Орехи</option>
-
+                    <option value="berries">Ягоды</option>
+                    <option value="shrooms">Грибы</option>
                 </select>
-                <input type='text' name='name' placeholder="Название продукта" autocomplete="off">
-                <textarea placeholder="Описание продукта" rows="5" name="description"></textarea>
-                <input type='text' name="country" placeholder="Страна-производитель">
-                <input type="file" name='image' accept='image/jpeg,image/png,image/gif,image/jpg' value='Загрузить изображение'>
-                <input type='submit' value="Добавить товар">
+
+                <div id="types" hidden>
+                    <p>Выберите разновидность продукта</p>
+                    <select name="item-kind" id="item-kind" form="add-item" onchange="slide_select('form-part', this)">
+                        <option value="">-</option>
+                    </select>
+                </div>
+
+                <div id="form-part" hidden>
+                    <input  type='text' id="name" name='name' placeholder="Название продукта" autocomplete="off">
+                    <textarea placeholder="Описание продукта" rows="5" name="description"></textarea>
+                    <input type='text' name="country" placeholder="Страна-производитель">
+                    <input type="file" name='image' accept='image/jpeg,image/png,image/gif,image/jpg' value='Загрузить изображение'>
+                    <input type='submit' value="Добавить товар">
+                </div>
             </form>
 <script  src='/public_html/scripts/form.js'></script>

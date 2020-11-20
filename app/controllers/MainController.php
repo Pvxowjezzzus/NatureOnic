@@ -7,36 +7,30 @@ use app\libs\Pagination;
 
 class MainController extends Controller
 {
+    public $pagination;
+
+    public function pagination()
+    {
+        $this->pagination = new Pagination($this->route, $this->model->ItemCount($this->route), 9);
+    }
+
     public function indexAction()
     {
-
         $this->view->render('ООО Натуроник');
     }
 
-    public function fruitsAction()
+    public function stuffAction()
     {
-        $pagination = new Pagination($this->route, $this->model->ItemCount($this->route), 9);
+        $this->pagination();
+        $this->model->sortby($_GET);
         $vars = [
-            'fruits' => $this->model->showItems($this->route),
-            'pagination' => $pagination->get(),
+            'items' => $this->model->showItems($this->route),
+            'pagination' => $this->pagination->get(),
+            'cat' => $this->route['cat'],
+            'dir' => $this->model->direction(),
+            'types' => $this->model->types($this->route),
         ];
-
-        $this->view->render('Фрукты', $vars);
+        $this->view->render($this->model->title($this->route['cat']), $vars);
     }
-    public function vegiesAction()
-    {
-        $vars = [
-            'vegies' => $this->model->showItems($this->route),
-        ];
 
-        $this->view->render('Овощи', $vars);
-    }
-    public function nutsAction()
-    {
-        $vars = [
-            'nuts' => $this->model->showItems($this->route),
-        ];
-
-        $this->view->render('Орехи', $vars);
-    }
 }

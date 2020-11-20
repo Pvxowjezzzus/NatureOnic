@@ -70,13 +70,27 @@ header {
     flex-direction: column;
     width: 30%;
 }
-.form input   {
+.form input  {
     margin-bottom: 5%;
+    transition: 1s;
+}
+.form input[type='text'], .form textarea, .form select {
+    border: 1px #000 solid;
+    padding: 5px;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+.form div {
+    flex-direction: column;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
 }
 .form textarea, .form select{
-    margin-bottom: 5%;
+margin-bottom: 5%;
 }
-
+.form h3 {
+    margin-bottom: 10px;
+}
 .form p {
     padding: 0;
 }

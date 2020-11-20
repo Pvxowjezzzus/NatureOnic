@@ -6,7 +6,7 @@ namespace app\libs;
 
 class Pagination
 {
-    private $max = 10;
+    private $max = 6;
     private $route;
     private $index = '';
     private $current_page;
@@ -24,7 +24,7 @@ class Pagination
     public function get() {
         $links = null;
         $limits = $this->limits();
-        $html = '<div class="page-container middle">   <div class="pagination"><ul>';
+        $html = '<div class="page-container middle"><div class="pagination"><ul>';
         for ($page = $limits[0]; $page <= $limits[1]; $page++) {
             if ($page == $this->current_page) {
                 $links .= '<li><span>'.$page.'</span></li>';
@@ -34,10 +34,10 @@ class Pagination
         }
         if (!is_null($links)) {
             if ($this->current_page > 1) {
-                $links = $this->generateHtml(1, 'Назад').$links;
+                $links = $this->generateHtml($this->current_page-1, 'Назад').$links;
             }
             if ($this->current_page < $this->amount) {
-                $links .= $this->generateHtml($this->amount, 'Вперед');
+                $links .= $this->generateHtml($this->current_page+1, 'Вперед');
             }
         }
         $html .= $links.' </ul></div></div>';
@@ -48,7 +48,12 @@ class Pagination
         if (!$text) {
             $text = $page;
         }
-        return '<li><a  href="/'.$this->route['action'].'/'.$page.'">'.$text.'</a></li>';
+        if(isset($_GET['type']))
+            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.'/?type='.$_GET['type'].'">'.$text.'</a></li>';
+        else
+            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.'">'.$text.'</a></li>';
+
+        return $link;
     }
 
     private function limits() {

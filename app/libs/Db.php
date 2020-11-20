@@ -11,7 +11,7 @@ protected $db;
     {
         $config = require 'app/config/db.php';
         try {
-            $this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' .$config['name']. ';charset=utf8', $config['user'], $config['password'], array(
+            $this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' .$config['name']. ';', $config['user'], $config['password'], array(
                 PDO::ATTR_ERRMODE => TRUE
             ));
 

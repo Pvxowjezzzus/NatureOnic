@@ -2,10 +2,7 @@
 return [
     'all' => [
         'index',
-        'fruits',
-        'vegies',
-        'nuts',
-
+        'stuff'
     ],
     'login/admin' => [
         'auth',
@@ -16,6 +13,8 @@ return [
         'logout',
         'items',
         'itemAdd',
+        'itemEdit',
         'itemDelete',
+        'typeAdd'
     ],
 ];
