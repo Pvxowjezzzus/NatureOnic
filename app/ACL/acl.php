@@ -6,6 +6,7 @@ return [
     ],
     'login/admin' => [
         'auth',
+        'signup',
 
         ],
     'admin' => [

@@ -9,15 +9,16 @@ use app\core\Controller;
 use app\core\View;
 use app\libs\Images;
 
-class   Admin extends Model
+class Admin extends Model
 {
     public $data;
-    private $cats = [
+    public $cats = [
         'fruits' => 'Фрукты',
         'vegies' => 'Овощи',
         'nuts' => 'Орехи',
         'berries' => 'Ягоды',
         'shrooms' => 'Грибы',
+        'flesh' => 'Мясная продукция',
     ];
 
     public function ipList()
@@ -233,7 +234,7 @@ class   Admin extends Model
             return false;
         }
         if ($aliaslen < 5 || $aliaslen > 50 || !preg_match("/[a-z]/", $post['alias'])) {
-            $this->error = 'Поле "Название фильтра" должно содержать от 5 до 50 латинских символов';
+            $this->error = 'Поле "Псевдоним" должно содержать от 5 до 50 латинских символов';
             return false;
         }
         return true;
@@ -244,7 +245,7 @@ class   Admin extends Model
         $params = [
             'id' => null,
             'name' =>  mb_convert_case($this->pure($post['name']), MB_CASE_TITLE),
-            'alias' => $this->pure($post['alias']),
+            'alias' => mb_convert_case($this->pure($post['alias']), MB_CASE_LOWER),
             'category' => $this->pure($post['item-cat']),
         ];
 

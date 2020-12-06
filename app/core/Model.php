@@ -17,6 +17,6 @@ public $db;
 
     public function pure($str)
     {
-        return trim(htmlentities($str, ENT_QUOTES, "UTF-8"));
+        return trim(htmlentities(strip_tags($str), ENT_QUOTES, "UTF-8"));
     }
 }

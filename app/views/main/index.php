@@ -95,6 +95,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="onecol1">
+                    <div class="portfolio-item">
+                        <div class="portfolio-item__png">
+                            <a href="/stuff/flesh"><img src="/public_html/img/saw%20trap%20(snare).gif"></a>
+                        </div>
+                        <div class="portfolio-item__title">
+                            <h3><a href="/stuff/flesh">Мясная продукция</a></h3>
+                        </div>
+                        <div class="portfolio-item__text">
+                            <p>Свежее мясо...Первый кабанчик...Fresh blood...Mein Teil</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -135,7 +148,4 @@
             <label for="switch5"></label>
         </div>
     </article>
-</div>
-<div class="mainContent" style="padding: 20px; height: 450px; width: auto; background-color:#f8f8f8;">
-    <h2 class="title">Что люди думают о нас</h2>
 </div>

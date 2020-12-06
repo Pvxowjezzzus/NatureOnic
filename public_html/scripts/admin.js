@@ -22,6 +22,9 @@ function slide_select(name, e) {
         obj.classList.remove('fadeInDown');
         obj.setAttribute('hidden', true);
         obj.style.display = 'none';
+        if(obj.value !== '') {
+            slide_select('form-part', name);
+        }
     }
 }
     function get_values(e, callback, param) {

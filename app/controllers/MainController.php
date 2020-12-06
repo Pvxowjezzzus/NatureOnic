@@ -30,6 +30,7 @@ class MainController extends Controller
             'dir' => $this->model->direction(),
             'types' => $this->model->types($this->route),
         ];
+
         $this->view->render($this->model->title($this->route['cat']), $vars);
     }
 

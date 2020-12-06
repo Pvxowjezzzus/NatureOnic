@@ -1,9 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta content="text/html" charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="Content-Security-Policy: font-src" content="default-src 'none'; frame-src 'none'; base-uri 'none'; script-src-elem 'self'; style-src-elem 'self'; img-src 'self'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/public_html/css/admin-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
@@ -21,7 +19,7 @@
         <div class="sidebar">
             <p>Приветствую, <?=$_SESSION['login']?></p>
 
-            <a href="/admin-panel">
+            <a href="/admin">
                 <i class="fa fa-fw fa-home"></i>
                 <span>Главная</span>
             </a>
@@ -54,8 +52,9 @@
     <?php endif ?>
         <?= $content ?>
     </div>
-</body>
-<?php if ($_SESSION['admin'] == 1): ?>
-    <script type="text/javascript" src="/public_html/scripts/admin.js"></script>
+    <?php if ($_SESSION['admin'] == 1): ?>
+    <script rel='script' src="/public_html/scripts/admin.js"></script>
 <?php endif; ?>
+</body>
+
 </html>

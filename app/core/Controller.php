@@ -14,10 +14,10 @@ abstract class Controller
     {
         $this->route = $route;
         $this->model = $this->LoadModel($route['controller']);
+        $this->view = new View($route);
         if(!$this->checkACL()) {
             View::ErrorStatus(403);
         }
-        $this->view = new View($route);
 
 
     }
@@ -40,6 +40,10 @@ abstract class Controller
         }
         elseif ($this->isACL('admin') && $this->model->ipList() && isset($_SESSION['admin'])) {
             return true;
+        }
+
+        elseif($this->isACL('admin') && $this->model->ipList() && !isset($_SESSION['admin'])) {
+            $this->view->redirect('admin/login');
         }
 
 

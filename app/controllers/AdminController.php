@@ -22,10 +22,15 @@ class AdminController extends Controller
                 exit($this->view->message(http_response_code(400), $this->model->error));
             }
 
-            exit($this->view->location('admin-panel'));
+            exit($this->view->location('admin'));
         }
 
         $this->view->render('Вход в Панель Администратора');
+    }
+
+    public function signupAction()
+    {
+        $this->view->render('Регистрация аккаунта');
     }
 
     public function adminAction()
@@ -67,7 +72,10 @@ class AdminController extends Controller
             }
             $this->view->message('added','Продукт успешно добавлен!');
         }
-        $this->view->render('Добавление продукта');
+        $vars = [
+            'cats'=> $this->model->cats,
+        ];
+        $this->view->render('Добавление продукта', $vars);
     }
 
 
@@ -97,6 +105,7 @@ class AdminController extends Controller
                 exit($this->view->message(http_response_code(400), 'Ошибка отправки запроса!'));
             }
             $this->view->message(http_response_code(200),'Данные продукта обновлены!');
+//            $this->view->redirect($this->route['cat'].'/'.$this->route['id']);
         }
         $vars = [
         'item' => $this->model->Items('single',$this->route),
@@ -119,7 +128,10 @@ class AdminController extends Controller
             }
             $this->view->message(http_response_code(200),'Фильтр успешно добавлен!');
         }
-        $this->view->render("Добавление фильтра");
+        $vars = [
+            'cats'=> $this->model->cats,
+        ];
+        $this->view->render("Добавление фильтра", $vars);
     }
 
 }

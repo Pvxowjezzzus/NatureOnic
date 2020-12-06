@@ -3,11 +3,9 @@
                 <p>Выберите категорию продукта</p>
                 <select id="item-cat" form="add-item" onchange="slide_select('types', this), get_values(this, null, null)">
                     <option value="">-</option>
-                    <option value="fruits">Фрукты</option>
-                    <option value="vegies">Овощи</option>
-                    <option value="nuts">Орехи</option>
-                    <option value="berries">Ягоды</option>
-                    <option value="shrooms">Грибы</option>
+                    <? foreach ($cats as $key => $val): ?>
+                        <option value="<?=$key?>"><?=$val?></option>
+                    <? endforeach; ?>
                 </select>
 
                 <div id="types" hidden>

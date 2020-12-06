@@ -43,15 +43,25 @@ class Pagination
         $html .= $links.' </ul></div></div>';
         return $html;
     }
+    private function check_sorting() {
+        if(isset($_GET['type']) && !empty($_GET['type'])) {
+            $char = "&";
+        }
+        else {
+            $char = "?";
+        }
+        if(isset($_GET['by']) && isset($_GET['dir']))
+            return $char.'by='.$_GET['by'].'&dir='.$_GET['dir'];
+    }
 
     private function generateHtml($page, $text = null) {
         if (!$text) {
             $text = $page;
         }
         if(isset($_GET['type']))
-            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.'/?type='.$_GET['type'].'">'.$text.'</a></li>';
+            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.'/?type='.$_GET['type'].$this->check_sorting().'">'.$text.'</a></li>';
         else
-            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.'">'.$text.'</a></li>';
+            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.$this->check_sorting().'">'.$text.'</a></li>';
 
         return $link;
     }

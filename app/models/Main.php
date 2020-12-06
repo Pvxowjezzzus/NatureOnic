@@ -14,6 +14,7 @@ class Main extends Model
         'nuts' => 'Орехи',
         'berries' => 'Ягоды',
         'shrooms' => 'Грибы',
+        'flesh' => 'Мясная продукция',
     ];
     public function ItemCount($route) {
 
@@ -51,9 +52,7 @@ class Main extends Model
               $items = $this->db->row('SELECT * FROM ' . $route['cat'].' '.$this->sortby($_GET).' LIMIT :start, :max', $params);
           }
             foreach ($items as &$val) {
-              $val['name'] =  mb_convert_case($val['name'], MB_CASE_TITLE);
               $val['country'] = mb_convert_case($val['country'], MB_CASE_TITLE);
-              $val['description'] = mb_convert_case($val['description'], MB_CASE_TITLE);
             }
             return $items;
     }
@@ -65,6 +64,8 @@ class Main extends Model
          else
              return 'ORDER BY '.$get['by'].' '.$dir;
     }
+
+
 
     public function direction()
     {
@@ -85,4 +86,6 @@ class Main extends Model
         ];
         return $this->db->query('SELECT * FROM varietes WHERE category = :cat ', $params);
     }
+
+
 }

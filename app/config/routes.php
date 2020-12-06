@@ -12,33 +12,20 @@ return [
         'controller' => 'main',
         'action' => 'stuff'
     ],
-//    'vegies'=> [
-//        'controller' => 'main',
-//        'action' => 'vegies'
-//    ],
-//
-//    'vegies/{page:\d+}'=> [
-//        'controller' => 'main',
-//        'action' => 'vegies'
-//    ],
-//    'nuts'=> [
-//        'controller' => 'main',
-//        'action' => 'nuts'
-//    ],
-//    'nuts/{page:\d+}'=> [
-//        'controller' => 'main',
-//        'action' => 'nuts'
-//    ],
     'admin/login' => [
         'controller' => 'admin',
         'action' => 'auth'
+    ],
+    'admin/signup' => [
+        'controller' => 'admin',
+        'action' => 'signup'
     ],
     'admin/logout' => [
         'controller' => 'admin',
         'action' => 'logout',
     ],
 
-    'admin-panel' => [
+    'admin' => [
         'controller' => 'admin',
         'action' => 'admin'
     ],
