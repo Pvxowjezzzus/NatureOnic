@@ -11,7 +11,7 @@ class MainController extends Controller
 
     public function pagination()
     {
-        $this->pagination = new Pagination($this->route, $this->model->ItemCount($this->route), 9);
+        $this->pagination = new Pagination($this->route, $this->model->ItemCount($this->route), 9, $this->route['page']);
     }
 
     public function indexAction()

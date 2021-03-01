@@ -38,7 +38,7 @@
                             <h3><a href="/stuff/vegies">Овощи</a></h3>
                         </div>
                         <div class="portfolio-item__text">
-                            <p>О́вощи — кулинарный термин, обозначающий съедобную часть некоторых растений, а также всякую твёрдую растительную пищу.</p>
+                            <p><strong>О́вощи</strong> — кулинарный термин, обозначающий съедобную часть некоторых растений, а также всякую твёрдую растительную пищу.</p>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                             <h3><a href="/stuff/fruits">Фрукты</a></h3>
                         </div>
                         <div class="portfolio-item__text">
-                            <p>Фру́кт — сочный съедобный плод растения. Фрукты являются важной составляющей пищи человека и многих животных.</p>
+                            <p><strong>Фру́кт</strong> — сочный съедобный плод растения. Фрукты являются важной составляющей пищи человека и многих животных.</p>
                         </div>
                     </div>
                 </div>
@@ -65,46 +65,46 @@
                             <h3><a href="/stuff/nuts">Орехи</a></h3>
                         </div>
                         <div class="portfolio-item__text">
-                            <p>Оре́х — плод некоторых растений, как правило, со съедобным ядром и твёрдой скорлупой.</p>
+                            <p><strong>Оре́х</strong> — плод некоторых растений, как правило, со съедобным ядром и твёрдой скорлупой.</p>
                         </div>
                     </div>
                 </div>
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <a href="/stuff/berries"><img src="/public_html/img/13.jpg"></a>
+                            <a href="/stuff/berries"><img src="/public_html/img/17.jpg"></a>
                         </div>
                         <div class="portfolio-item__title">
-                            <h3><a href="/stuff/berries">Ягоды (поменять src img)</a></h3>
+                            <h3><a href="/stuff/berries">Ягоды</a></h3>
                         </div>
                         <div class="portfolio-item__text">
-                            <p>Фру́кт — сочный съедобный плод растения. Фрукты являются важной составляющей пищи человека и многих животных.</p>
+                            <p><strong>Я́года</strong> — маленький сочный или мясистый плод, обычно кустарниковых или травянистых растений, который при употреблении в пищу не требуется откусывать или разрезать.</p>
                         </div>
                     </div>
                 </div>
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <a href="/stuff/shrooms"><img src="/public_html/img/13.jpg"></a>
+                            <a href="/stuff/shrooms"><img src="/public_html/img/16.jpg"></a>
                         </div>
                         <div class="portfolio-item__title">
-                            <h3><a href="/stuff/shrooms">Грибы(поменять src img)</a></h3>
+                            <h3><a href="/stuff/shrooms">Грибы</a></h3>
                         </div>
                         <div class="portfolio-item__text">
-                            <p>Фру́кт — сочный съедобный плод растения. Фрукты являются важной составляющей пищи человека и многих животных.</p>
+                            <p><strong>Грибы</strong> — Существует множество съедобных грибов, выращиваемых и собираемых во всём мире. Грибы обладают специфическими вкусом и запахом, некоторые из них являются деликатесами.</p>
                         </div>
                     </div>
                 </div>
                 <div class="onecol1">
                     <div class="portfolio-item">
                         <div class="portfolio-item__png">
-                            <a href="/stuff/flesh"><img src="/public_html/img/saw%20trap%20(snare).gif"></a>
+                            <a href="/stuff/meat"><img src="/public_html/img/19.jpg"></a>
                         </div>
                         <div class="portfolio-item__title">
-                            <h3><a href="/stuff/flesh">Мясная продукция</a></h3>
+                            <h3><a href="/stuff/meat">Мясная продукция</a></h3>
                         </div>
                         <div class="portfolio-item__text">
-                            <p>Свежее мясо...Первый кабанчик...Fresh blood...Mein Teil</p>
+                            <p><strong>Мя́со</strong> — скелетная поперечно-полосатая мускулатура животного с прилегающими к ней жировой и соединительной тканями, а также прилегающей костной тканью или без неё.</p>
                         </div>
                     </div>
                 </div>
@@ -122,6 +122,7 @@
         <input type="radio" name="slider" id="switch3">
         <input type="radio" name="slider" id="switch4">
         <input type="radio" name="slider" id="switch5">
+        <input type="radio" name="slider" id="switch6">
         <div id="slides">
             <div id="overflow">
                 <div class="image">

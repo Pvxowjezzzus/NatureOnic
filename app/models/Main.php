@@ -14,7 +14,7 @@ class Main extends Model
         'nuts' => 'Орехи',
         'berries' => 'Ягоды',
         'shrooms' => 'Грибы',
-        'flesh' => 'Мясная продукция',
+        'meat' => 'Мясная продукция',
     ];
     public function ItemCount($route) {
 

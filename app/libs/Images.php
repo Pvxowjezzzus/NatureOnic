@@ -44,4 +44,39 @@ class Images
         imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
         $this->image = $new_image;
     }
+
+    public function size($img)
+    {
+        $bytes = floatval($img);
+        $arr = array(
+            0 => array(
+                "UNIT" => "b",
+                "VALUE" => 1,
+
+            ),
+            1=> array(
+                "UNIT" => "Kb",
+                "VALUE" => 1024,
+
+            ),
+            2=>array(
+                "UNIT" => "Mb",
+                "VALUE" => pow(1024, 2),
+
+            ),
+            3 => array(
+                "UNIT" => "Gb",
+                "VALUE" => pow(1024,3 ),
+
+            ),
+        );
+        foreach($arr as $arritem) {
+            if($bytes >= $arritem['VALUE']) {
+                $res = $bytes / $arritem['VALUE'];
+                $res = str_replace('.', ',', strval(round($res, 2)))." ".$arritem['UNIT'];
+                break;
+            }
+        }
+        return $res;
+    }
 }

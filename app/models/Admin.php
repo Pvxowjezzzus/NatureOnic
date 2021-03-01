@@ -65,7 +65,11 @@ class Admin extends Model
         }
         exit;
     }
+    public function ItemCount($get) {
 
+        $query = $this->db->column(" SELECT COUNT(id) FROM ". $get ." ");
+        return $query;
+    }
     public function postValid($post, $type)
     {
         $namelen = iconv_strlen($post['name']);
@@ -107,14 +111,24 @@ class Admin extends Model
             $allowedtypes = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'];
             if (!in_array($_FILES["image"]["type"], $allowedtypes)) {
                 $this->error = 'Запрещенный тип файла';
+                unset($_FILES['image']['tmp_name']);
                 return false;
             }
+            if($_FILES['image']['size'] > 10000) {
+                $image = new Images();
+                $this->error = $image->size($_FILES['image']['size']);
+                return false;
+            }
+
+
+
         }
         return true;
     }
 
     public function uploadImage($part)
     {
+
         $path = "public_html" . $part;
         static $randStr = '0123456789abcdefghijklmnopqrstuvwxyz';
         $randname = '';
@@ -185,19 +199,24 @@ class Admin extends Model
 
     public function items_title($get)
     {
-        if (!array_key_exists($get['cat'], $this->cats)) {
+        if (!array_key_exists($get, $this->cats)) {
             View::ErrorStatus(404);
         }
-        return $this->cats[$get['cat']];
+        return $this->cats[$get];
     }
 
     public function Items($type, $route)
     {
+        $max = 10;
+        $params = [
+            'max' => $max,
+            'start' => ((($_GET['page'] ?: 1) - 1) * $max),
+        ];
         $table = $_GET['cat'];
         if ($type == 'all')
-            $data = $this->db->row('SELECT * FROM ' . $table . ' ');
+            $data = $this->db->row('SELECT * FROM ' . $table .' LIMIT :start, :max', $params);
         elseif ($type == 'single') {
-            $data = $this->db->row('SELECT * FROM ' . $route['cat'] . ' WHERE id = ' . $route['id'] . ' ');
+            $data = $this->db->row('SELECT * FROM ' . $route['cat'] . ' WHERE id = ' . $route['id'] . ' LIMIT :start, :max', $params);
         }
         foreach ($data as &$val) {
             $val['name'] = mb_convert_case($val['name'], MB_CASE_TITLE);

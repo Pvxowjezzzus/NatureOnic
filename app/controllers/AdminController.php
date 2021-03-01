@@ -3,13 +3,23 @@
 namespace app\controllers;
 use app\core\Controller;
 use app\core\View;
+use app\libs\Pagination;
 
 class AdminController extends Controller
 {
+    public $pagination;
+
+    public function pagination()
+    {
+        $this->pagination = new Pagination($this->route, $this->model->ItemCount($_GET['cat']), 10, $_GET['cat']);
+    }
     public function __construct($route)
     {
         parent::__construct($route);
         $this->view->layout = 'admin';
+        $this->log = $_SERVER['DOCUMENT_ROOT'].'/app/log/stuff.txt';
+        if(date('h:i') > date('h:i',filemtime($this->log)))
+            file_put_contents($this->log, null);
     }
 
     public function authAction()
@@ -35,7 +45,12 @@ class AdminController extends Controller
 
     public function adminAction()
     {
-       $this->view->render('Панель Администратора');
+        $count = file($this->log);
+        $vars = [
+            'stuff' =>  sizeof($count),
+            'changes' =>    date("F d Y H:i:s.", filemtime($this->log))
+        ];
+       $this->view->render('Панель Администратора', $vars);
     }
 
     public function logoutaction()
@@ -47,9 +62,11 @@ class AdminController extends Controller
 
     public function itemsAction()
     {
+        $this->pagination();
         $vars = [
-            'title'=>$this->model->items_title($_GET),
-            'items'=>$this->model->Items('all',''),
+            'pagination'=>$this->pagination->get(),
+            'title'=>$this->model->items_title($_GET['cat']),
+            'items'=>$this->model->Items('all', $this->route),
         ];
         $this->view->render('Продукты',$vars);
     }
@@ -62,7 +79,6 @@ class AdminController extends Controller
 
         if (!empty($_POST)) {
             if(!$this->model->postValid($_POST, 'add')) {
-
                 exit($this->view->message(http_response_code(400), $this->model->error));
             }
 
@@ -105,7 +121,7 @@ class AdminController extends Controller
                 exit($this->view->message(http_response_code(400), 'Ошибка отправки запроса!'));
             }
             $this->view->message(http_response_code(200),'Данные продукта обновлены!');
-//            $this->view->redirect($this->route['cat'].'/'.$this->route['id']);
+//          $this->view->redirect($this->route['cat'].'/'.$this->route['id']);
         }
         $vars = [
         'item' => $this->model->Items('single',$this->route),

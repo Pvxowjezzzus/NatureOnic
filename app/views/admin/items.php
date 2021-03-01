@@ -33,4 +33,5 @@
         <? endforeach; ?>
         </tbody>
     </table>
+    <?=$pagination?>
 <? endif; ?>

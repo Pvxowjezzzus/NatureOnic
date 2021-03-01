@@ -9,16 +9,18 @@ class Pagination
     private $max = 6;
     private $route;
     private $index = '';
-    private $current_page;
+    public $current_page;
     private $total;
     private $limit;
+    public $page;
 
-    public function __construct($route, $total, $limit) {
+    public function __construct($route, $total, $limit, $page) {
         $this->route = $route;
         $this->total = $total;
         $this->limit = $limit;
         $this->amount = $this->amount();
-        $this->setCurrentPage();
+        $this->page = $page;
+        $this->setCurrentPage($this->page);
     }
 
     public function get() {
@@ -58,8 +60,11 @@ class Pagination
         if (!$text) {
             $text = $page;
         }
-        if(isset($_GET['type']))
-            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.'/?type='.$_GET['type'].$this->check_sorting().'">'.$text.'</a></li>';
+        if($this->route['controller'] =='admin') {
+            $link = '<li><a  href="/'.$this->route['controller'].'/'.$this->route['action'].'?cat='.$_GET['cat'].'&page='.$page.'">'.$text.'</a></li>';
+        }
+        elseif(isset($_GET['type']))
+            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.'?type='.$_GET['type'].$this->check_sorting().'">'.$text.'</a></li>';
         else
             $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.$this->check_sorting().'">'.$text.'</a></li>';
 
@@ -79,18 +84,23 @@ class Pagination
         return array($start, $end);
     }
 
-    private function setCurrentPage() {
-        if (isset($this->route['page'])) {
-            $currentPage = $this->route['page'];
-        } else {
-            $currentPage = 1;
+    private function setCurrentPage($page) {
+
+        switch ($page) {
+            case isset($_GET['page']):
+                    $this->current_page = $_GET['page'];
+                    break;
+            case isset($this->route['page']):
+                    $this->current_page = $this->route['page'];
+                    break;
         }
-        $this->current_page = $currentPage;
+
         if ($this->current_page > 0) {
             if ($this->current_page > $this->amount) {
                 $this->current_page = $this->amount;
             }
-        } else {
+        }
+        else {
             $this->current_page = 1;
         }
     }

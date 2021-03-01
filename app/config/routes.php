@@ -33,6 +33,10 @@ return [
         'controller' => 'admin',
         'action' => 'items',
     ],
+    'admin/items' => [
+        'controller' => 'admin',
+        'action' => 'items'
+    ],
     'admin/items/add' => [
         'controller' => 'admin',
         'action' => 'itemAdd',
