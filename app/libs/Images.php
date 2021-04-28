@@ -50,30 +50,31 @@ class Images
         $bytes = floatval($img);
         $arr = array(
             0 => array(
-                "UNIT" => "b",
-                "VALUE" => 1,
+                "UNIT" => "Gb",
+                "VALUE" => pow(1024, 3),
 
             ),
-            1=> array(
-                "UNIT" => "Kb",
-                "VALUE" => 1024,
-
-            ),
-            2=>array(
+            1=>array(
                 "UNIT" => "Mb",
                 "VALUE" => pow(1024, 2),
 
             ),
-            3 => array(
-                "UNIT" => "Gb",
-                "VALUE" => pow(1024,3 ),
+             2=> array(
+                "UNIT" => "Kb",
+                "VALUE" => 1024,
 
             ),
+           
+            3 => array(
+                "UNIT" => "b",
+                "VALUE" => 1,
+            ), 
         );
+
         foreach($arr as $arritem) {
             if($bytes >= $arritem['VALUE']) {
                 $res = $bytes / $arritem['VALUE'];
-                $res = str_replace('.', ',', strval(round($res, 2)))." ".$arritem['UNIT'];
+                $res = str_replace('.', ',', strval(round($res, 2))." ".$arritem['UNIT']);
                 break;
             }
         }

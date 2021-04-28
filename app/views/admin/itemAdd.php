@@ -1,4 +1,4 @@
-<form class="form"  action="/admin/items/add" id='add-item' method="post">
+<form class="form"  action="/admin/items/add" id='add-item' method="post" enctype="multipart/form-data">
                 <h3>Добавление продукта</h3>
                 <p>Выберите категорию продукта</p>
                 <select id="item-cat" form="add-item" onchange="slide_select('types', this), get_values(this, null, null)">
@@ -19,8 +19,8 @@
                     <input  type='text' id="name" name='name' placeholder="Название продукта" autocomplete="off">
                     <textarea placeholder="Описание продукта" rows="5" name="description"></textarea>
                     <input type='text' name="country" placeholder="Страна-производитель">
-                    <input type="file" name='image' accept='image/jpeg,image/png,image/gif,image/jpg' value='Загрузить изображение'>
+                    <input type="file" name='image' accept='image/jpeg,image/png,image/gif,image/webp' value='Загрузить изображение'>
                     <input type='submit' value="Добавить товар">
                 </div>
             </form>
-<script  src='/public_html/scripts/form.js'></script>
+<script src='/public_html/scripts/form.js'></script>

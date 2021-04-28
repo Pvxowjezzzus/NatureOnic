@@ -14,15 +14,15 @@ function startSession($isUserActivity=true) {
     ini_set('session.cookie_lifetime', 0);
     ini_set('session.use_strict_mode', 1);
     if ( ! session_start() ) return false;
-    $t = time();
-    if ( $sessionLifetime ) {
+    $time = time();
+    if ($sessionLifetime) {
 
-        if (isset($_SESSION['lastactivity'])  && $_SESSION['admin'] == 1 && strpos($url['path'], '/admin') !== false  && $t-$_SESSION['lastactivity'] >= $sessionLifetime ) {
+        if (isset($_SESSION['lastactivity'])  && $_SESSION['admin'] == 1 && strpos($url['path'], '/admin') !== false  && $time-$_SESSION['lastactivity'] >= $sessionLifetime ) {
                     destroySession();
                     exit(header( "Refresh:0 url=/admin/login"));
         }
         else {
-            if ( $isUserActivity ) $_SESSION['lastactivity'] = $t;
+            if ( $isUserActivity ) $_SESSION['lastactivity'] = $time;
         }
     }
 

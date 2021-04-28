@@ -4,6 +4,10 @@ return [
     'controller' => 'main',
     'action' => 'index'
     ],
+    'support/send' => [
+        'controller' => 'main',
+        'action' => 'support'
+    ],
     'stuff/{cat:\w+}'=> [
         'controller' => 'main',
         'action' => 'stuff'
@@ -29,9 +33,9 @@ return [
         'controller' => 'admin',
         'action' => 'admin'
     ],
-    'admin/items' => [
+    'admin/support' =>[
         'controller' => 'admin',
-        'action' => 'items',
+	    'action' => 'support'
     ],
     'admin/items' => [
         'controller' => 'admin',

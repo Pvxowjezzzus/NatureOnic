@@ -1,16 +1,27 @@
 <section class="container">
-   <a class="tomain-btn" href="/">На Главную</a>
-            <div class="title"><?=$title?></div>
-                <?php if (empty($items)): ?>
-                    <p class="empty-msg">Категория "<?=$title?>" пуста:)</p>
-                <section class="sort">
+   <a class="btn__main" href="/">На Главную</a>
+            <div class="title"><h3><?=$title?></h3></div>
+
+                <?php if(empty($items) && !empty($_GET['type'])): ?>
+                    <p class="empty-msg">Разновидность <?=$type?> пуста.</p>
+                    <a class="back-link" href="/stuff/<?=$cat?>">Вернуться в категорию</a>
+                    <div class="sort">
+                        <div class="filters">
+                            <a class='type' href="/stuff/<?=$cat?>">Все позиции</a>
+                        </div>
+                    </div>
+    
+                <?php elseif (empty($items) && !isset($_GET['type'])): ?>
+                    <p class="empty-msg"><?=$title?> пуста.</p>
+                <div class="sort">
                     <div class="filters">
                         <a class='type' href="/stuff/<?=$cat?>">Все позиции</a>
                     </div>
-                </section>
+                </div>
+             
                 <?php else: ?>
                     <?=$pagination;?>
-                    <section class="sort">
+                    <div class="sort">
                         <a <?= isset($_GET['type']) ? "href='/stuff/$cat?type=".$_GET['type']. "&by=date&dir=$dir'" : "href='/stuff/$cat?by=date&dir=$dir'"; ?> class="sort-val">
                             <span>Сортировать по дате</span>
                             <i <?=($_GET['by'] == 'date') ? "class='arrow-$dir'" : "" ?> >&uarr;</i>
@@ -25,7 +36,7 @@
                                 <a <?= ($type['alias'] == $_GET['type']) ? "class='type active'" : "class='type'"; ?> href="/stuff/<?=$cat?>?type=<?=$type['alias']?>"><?=html_entity_decode($type['name'])?></a>
                             <? endforeach; ?>
                         </div>
-                    </section>
+                    </div>
                     <div class="row">
                         <?php foreach ($items as $item):?>
                         <div class="onecol1">

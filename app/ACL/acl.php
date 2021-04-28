@@ -2,7 +2,8 @@
 return [
     'all' => [
         'index',
-        'stuff'
+        'stuff',
+        'support'
     ],
     'login/admin' => [
         'auth',
@@ -16,6 +17,7 @@ return [
         'itemAdd',
         'itemEdit',
         'itemDelete',
-        'typeAdd'
+        'typeAdd',
+	    'support',
     ],
 ];

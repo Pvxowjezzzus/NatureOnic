@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/public_html/css/admin-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"  crossorigin="anonymous">
     <title><?= $title ?></title>
 </head>
 <body>
@@ -34,6 +34,7 @@
                     <li><a href="/admin/items?cat=nuts">Орехи</a></li>
                     <li><a href="/admin/items?cat=berries">Ягоды</a></li>
                     <li><a href="/admin/items?cat=shrooms">Грибы</a></li>
+                    <li><a href="/admin/items?cat=meat">Мясо</a></li>
                 </ul>
             </div>
             <a href="/admin/items/add">
@@ -43,6 +44,10 @@
             <a href="/admin/items/types/add">
                 <i class="fa fa-fw fa-plus"></i>
                 <span>Добавить фильтр</span>
+            </a>
+            <a href="/admin/support">
+                <i class="fas fa-envelope"></i>
+                <span>Обратная связь</span>
             </a>
             <a href="/admin/logout">
                 <i class="fa fa-fw fa-sign-out"></i>

@@ -23,7 +23,7 @@ class View
             require 'app/views/layouts/'.$this->layout.'.php';
         }
     }
-
+   
     public function redirect($url) {
         header('location: /'.$url);
         exit;
@@ -44,8 +44,11 @@ class View
         exit(json_encode(['status'=>$status, 'message'=>$msg]));
     }
 
-    public function location($url)
+    public function form_msg($obj, $status, $msg) {
+        exit(json_encode(['object'=>$obj, 'status' => $status, 'message' => $msg]));
+    }
+    public function location($status,$url)
     {
-        exit(json_encode(['url'=>$url]));
+        exit(json_encode(['status' => $status,'url'=>$url]));
     }
 }

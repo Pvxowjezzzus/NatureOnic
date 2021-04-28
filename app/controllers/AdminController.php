@@ -9,9 +9,9 @@ class AdminController extends Controller
 {
     public $pagination;
 
-    public function pagination()
+    public function pagination($elem)
     {
-        $this->pagination = new Pagination($this->route, $this->model->ItemCount($_GET['cat']), 10, $_GET['cat']);
+        $this->pagination = new Pagination($this->route, $this->model->ItemCount($elem), 10, $elem);
     }
     public function __construct($route)
     {
@@ -29,10 +29,11 @@ class AdminController extends Controller
             $_SESSION['lastactivity'] = time();
              if(!$this->model->AuthValid($_POST))
             {
+                http_response_code(400);
                 exit($this->view->message(http_response_code(400), $this->model->error));
             }
-
-            exit($this->view->location('admin'));
+            http_response_code(200);
+            exit(array($this->view->location( http_response_code(200),'admin')));
         }
 
         $this->view->render('Вход в Панель Администратора');
@@ -55,18 +56,17 @@ class AdminController extends Controller
 
     public function logoutaction()
     {
-
         session_destroy();
         $this->view->redirect('admin/login');
     }
 
     public function itemsAction()
     {
-        $this->pagination();
+        $this->pagination($_GET['cat']);
         $vars = [
             'pagination'=>$this->pagination->get(),
             'title'=>$this->model->items_title($_GET['cat']),
-            'items'=>$this->model->Items('all', $this->route),
+            'items'=>$this->model->Items('all', $_GET['cat'],$this->route),
         ];
         $this->view->render('Продукты',$vars);
     }
@@ -79,11 +79,13 @@ class AdminController extends Controller
 
         if (!empty($_POST)) {
             if(!$this->model->postValid($_POST, 'add')) {
+                http_response_code(400);
                 exit($this->view->message(http_response_code(400), $this->model->error));
             }
 
             $id = $this->model->AddItem($_POST);
             if(!$id) {
+                http_response_code(400);
                 exit($this->view->message(http_response_code(400), 'Ошибка отправки запроса!'));
             }
             $this->view->message('added','Продукт успешно добавлен!');
@@ -112,12 +114,13 @@ class AdminController extends Controller
         }
         if (!empty($_POST)) {
             if(!$this->model->postValid($_POST, 'edit')) {
-
+                http_response_code(400);
                 exit($this->view->message(http_response_code(400), $this->model->error));
             }
 
             $id = $this->model->EditItem($_POST, $this->route);
             if(!$id) {
+                http_response_code(400);
                 exit($this->view->message(http_response_code(400), 'Ошибка отправки запроса!'));
             }
             $this->view->message(http_response_code(200),'Данные продукта обновлены!');
@@ -135,19 +138,29 @@ class AdminController extends Controller
     {
         if (!empty($_POST)) {
             if (!$this->model->typeValid($_POST)) {
-
+                http_response_code(400);
                 exit($this->view->message(http_response_code(400), $this->model->error));
             }
             $id = $this->model->AddType($_POST);
             if(!$id) {
+                http_response_code(400);
                 exit($this->view->message(http_response_code(400), 'Ошибка отправки запроса!'));
             }
+            http_response_code(200);
             $this->view->message(http_response_code(200),'Фильтр успешно добавлен!');
         }
         $vars = [
             'cats'=> $this->model->cats,
         ];
         $this->view->render("Добавление фильтра", $vars);
+    }
+
+	public function supportAction()
+	{
+		$this->pagination('support_messages');
+		$vars = ['pagination'=>$this->pagination->get(),
+		'items'=>$this->model->Items('all', 'support_messages', null)];
+		$this->view->render("Сообщения обратной связи", $vars);
     }
 
 }

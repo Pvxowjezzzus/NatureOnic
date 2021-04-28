@@ -11,20 +11,18 @@ function slide(name) {
     obj.toggleAttribute('hidden');
 }
 
-function slide_select(name, e) {
-    var obj = document.getElementById(name);
-    if(e.value !== '') {
+function slide_select(object, select) {
+    let obj = document.getElementById(object);
+    if(select.value !== '') {
         obj.classList.add('fadeInDown');
         obj.removeAttribute('hidden');
         obj.style.display = 'flex';
     }
     else {
+        console.log('empty');
         obj.classList.remove('fadeInDown');
         obj.setAttribute('hidden', true);
         obj.style.display = 'none';
-        if(obj.value !== '') {
-            slide_select('form-part', name);
-        }
     }
 }
     function get_values(e, callback, param) {
