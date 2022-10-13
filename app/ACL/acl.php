@@ -3,21 +3,26 @@ return [
     'all' => [
         'index',
         'stuff',
-        'support'
+        'request',
+	    'logout',
     ],
     'login/admin' => [
         'auth',
         'signup',
-
-        ],
+    ],
     'admin' => [
         'admin',
+        'profile',
         'logout',
         'items',
-        'itemAdd',
-        'itemEdit',
-        'itemDelete',
-        'typeAdd',
-	    'support',
+	    'itemAdd',
+	    'typeAdd',
+	    'requests',
+	    'itemDelete',
+	    'itemEdit',
+        'getDiagram',
+        'changeEmail',
+        'changePassword',
     ],
 ];
+?>

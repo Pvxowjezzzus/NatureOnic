@@ -38,17 +38,24 @@ class View
         }
         exit;
     }
-
-    public function message($status, $msg)
+    public function ItemCount($nuts, $driedfruits) {
+        exit(json_encode(['nuts'=>$nuts, "driedfruits"=>$driedfruits]));
+    }
+    public function message($status, $message)
     {
-        exit(json_encode(['status'=>$status, 'message'=>$msg]));
+        exit(json_encode(['status'=>$status, 'message'=>$message]));
     }
 
-    public function form_msg($obj, $status, $msg) {
-        exit(json_encode(['object'=>$obj, 'status' => $status, 'message' => $msg]));
+	public function form_valid($object, $status, $message)
+	{
+		exit(json_encode(['object'=>$object, 'status' => $status, 'message'=> $message]));
     }
+
+   
+
     public function location($status,$url)
     {
         exit(json_encode(['status' => $status,'url'=>$url]));
     }
 }
+?>

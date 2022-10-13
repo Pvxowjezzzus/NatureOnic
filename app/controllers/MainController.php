@@ -9,61 +9,65 @@ class MainController extends Controller
 {
     public $pagination;
 
-    public function pagination()
+    public function pagination() // Постраничная навигация
     {
-        $this->pagination = new Pagination($this->route, $this->model->ItemCount($this->route), 9, $this->route['page']);
+        $this->pagination = new Pagination($this->route, $this->model->ItemCount($this->route['cat']), 9, $this->route['page']);
     }
 
-    public function indexAction()
+    public function indexAction() // Главная страница сайта
     {
+        
         $vars = [
-            'description' => '«АГРИНОВА» - это компания, которая успешно осуществляет продажу орехов,
-             овощей и фруктов оптом. Товар, получаемый в указанные сроки главная задача компании."',
+            "products"=>$this->model->products(),
         ];
-        $this->view->render('Оптовая продажа', $vars);
+        $this->view->render('Сайт',$vars);
     }
 
-    public function stuffAction()
+    public function stuffAction() // Страница товаров
     {
         $this->pagination();
         $this->model->sortby($_GET);
         $vars = [
-            'items' => $this->model->showItems($this->route),
-            'pagination' => $this->pagination->get(),
-            'cat' => $this->route['cat'],
-            'dir' => $this->model->direction(),
-            'types' => $this->model->types($this->route),
-            'type' => $this->model->get_type($_GET['type']),
-            'description' => $this->model->get_description($this->route),
+            'items' => $this->model->showItems($this->route), // Демонстрация товаров
+            'pagination' => $this->pagination->get(), // Постраничная навигация
+            'cat' => $this->route['cat'], // Категория товара
+            'dir' => $this->model->direction(), // Сортировка по возрастанию или убыванию
+            'types' => $this->model->types($this->route), // Фильтры
+            'type' => $this->model->get_type($_GET['type']), // Тип
+            'description' => $this->model->get_description($this->route), // Описание товара
         ];
 
-        $this->view->render("Категория &laquo".$this->model->title($this->route['cat'])."&raquo", $vars);
+        $this->view->render("Каталог ".$this->model->title($this->route['cat'])."", $vars);
     }
 
-    public function supportAction() {
-            if(!empty($_POST)) {
+    public function requestAction() { // Страница заявки
+        if(!empty($_POST)) {
 
-                    if (!empty($_POST['value']) && !$this->model->preg_value($_POST['name'], $_POST['value'])) {
-                        http_response_code(400);
-                        exit($this->view->form_msg($_POST['name'], 'invalid-input', $this->model->error));
-                    }
-
-
-					elseif(isset($_POST['value']) && $this->model->preg_value($_POST['name'], $_POST['value'])) {
-						exit($this->view->form_msg($_POST['name'], $this->model->annotation[1], $this->model->annotation[0]));
-					}
-                    if (!$this->model->valid_support($_POST) || !empty($this->model->error)) {
-                        http_response_code(400);
-                        exit($this->view->form_msg($this->model->error[0], 'invalid', $this->model->error[1]));
-                    }
-	            if(!$this->model->send_report($_POST)) {
-		            http_response_code(400);
-		            exit($this->view->message('fail', 'Ошибка отправки заявки'));
-	            }
-                http_response_code(200);
-                exit($this->view->message( 'success', "Ваше сообщение будет прочитано.\nОжидайте ответ на почте\n🔒In development🔒"));
+            if (!empty($_POST['value']) && !$this->model->preg_value($_POST['name'], $_POST['value'])) {
+                http_response_code(400);
+                exit($this->view->form_valid($_POST['name'], 'invalid-input', $this->model->error));
             }
+
+
+            elseif(isset($_POST['value']) && $this->model->preg_value($_POST['name'], $_POST['value'])) {
+                exit($this->view->form_valid($_POST['name'], $this->model->annotation[1], $this->model->annotation[0]));
+            }
+            if (!$this->model->valid_request($_POST) || !empty($this->model->error)) {
+                http_response_code(400);
+                exit($this->view->form_valid($this->model->error[0], 'invalid', $this->model->error[1]));
+            }
+        if(!$this->model->send_request($_POST)) {
+            http_response_code(400);
+            exit($this->view->message('fail', 'Ошибка отправки заявки'));
+        }
+        else {
+            http_response_code(200);
+            $this->model->sendMessage($_POST);
+            exit($this->view->message('success', "Ваше сообщение будет прочитано.\n"));
+        }
+    }
 
 
     }
 }
+?>

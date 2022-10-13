@@ -5,3 +5,4 @@ return [
     'user' => 'root',
     'password' => 'root',
 ];
+?>

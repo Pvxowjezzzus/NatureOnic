@@ -13,7 +13,7 @@ function startSession($isUserActivity=true) {
     if ( session_id() ) return true;
     ini_set('session.cookie_lifetime', 0);
     ini_set('session.use_strict_mode', 1);
-    if ( ! session_start() ) return false;
+    if ( !session_start()) return false;
     $time = time();
     if ($sessionLifetime) {
 
@@ -40,3 +40,4 @@ startSession();
 session_start();
 $router = new Router;
 $router->run();
+?>

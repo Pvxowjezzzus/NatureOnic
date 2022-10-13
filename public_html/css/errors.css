@@ -4,9 +4,13 @@
     color: #fff;
 }
 
+body {
+    font-family: Montserrat;
+}
+
 #file_not_found {
-    height: 100vh;
-    background: linear-gradient(rgba(34, 104, 163, 0.8), rgba(0, 0, 0, 1)), url("../img/1.webp") no-repeat;
+    height: 15vh;
+    background: linear-gradient(rgba(102, 153, 51, 0.8), rgba(0, 0, 0, 1));
     background-size: cover;
     padding: 20%;
     text-align: center;

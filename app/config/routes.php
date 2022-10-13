@@ -4,9 +4,9 @@ return [
     'controller' => 'main',
     'action' => 'index'
     ],
-    'support/send' => [
+    'request/send' => [
         'controller' => 'main',
-        'action' => 'support'
+        'action' => 'request'
     ],
     'stuff/{cat:\w+}'=> [
         'controller' => 'main',
@@ -33,9 +33,13 @@ return [
         'controller' => 'admin',
         'action' => 'admin'
     ],
-    'admin/support' =>[
+    'admin/profile'=> [
+    'controller' => 'admin',
+    'action' => 'profile'
+    ],
+    'admin/requests' =>[
         'controller' => 'admin',
-	    'action' => 'support'
+	    'action' => 'requests'
     ],
     'admin/items' => [
         'controller' => 'admin',
@@ -49,13 +53,26 @@ return [
         'controller' => 'admin',
         'action' => 'typeAdd',
     ],
-    'admin/items/delete/{cat:\w+}/{id:\d+}' => [
+    'admin/items/delete/{id:\d+}' => [
         'controller' => 'admin',
         'action' => 'itemDelete',
     ],
-    'admin/items/edit/{cat:\w+}/{id:\d+}' => [
+    'admin/items/edit/{id:\d+}' => [
         'controller' => 'admin',
         'action' => 'itemEdit',
+    ],
+    'get-diagram' => [
+        'controller' => 'admin',
+        'action' => 'getDiagram'
+    ],
+    'admin/change/email' => [
+        'controller' => 'admin',
+        'action' => 'changeEmail',
+    ],
+    'admin/change/password' => [
+        'controller' => 'admin',
+        'action' => 'changePassword',
     ]
 
 ];
+?>

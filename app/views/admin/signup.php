@@ -1,16 +1,50 @@
-<section class="enter-admin">
-    <form class="admin-action" action="/admin/signup" method="post">
-        <h3>Регистрация аккаунта</h3>
-        <label for="login">Введите Email</label>
-        <input id="login" type="text" name="email" class="auth-input" placeholder="Email">
-        <label for="login">Введите Логин</label>
-        <input id="login" type="text" name="login" class="auth-input" placeholder="Логин">
-        <label for="password">Введите Пароль</label>
-        <input id="password" type="password" name="password" class="auth-input" placeholder="Пароль">
-        <label for="password">Введите повторно Пароль</label>
-        <input id="password" type="password" name="password" class="auth-input" placeholder="Пароль еще раз">
-        <input class="submit-log" type="submit" value="Зарегистрироваться" class="auth-input">
-    </form>
-    <a class="signup-link" href="/admin/login">Есть аккаунт? Войти</a>
-</section>
-<script src="/public_html/scripts/form.js"></script>
+<div class="form-wrapper">
+    <div class="text-center text-gray">
+        <h3>Регистрация</h3>
+    </div>
+    <div class="container">
+        <form action="/admin/signup" method="post" id="auth_form" class="form">
+                <div class="alert-block" id="alert-block">
+                    <div class="close" id="close-btn">
+                        <i class="fas fa-times close_icon"></i>
+                    </div>
+                    <span></span>
+                </div>
+            <div class="input-group">
+                <label class="control-label" for="username">Имя пользователя</label>
+                <div class="input-wrap">
+                    <input type="text" id="username" name="username" placeholder="Введите имя" autocomplete="off" />
+                </div>
+            </div>
+
+                <div class="input-group">
+                    <label class="control-label" for="email">Email</label>
+                    <div class="input-wrap">
+                        <input  type="email" name="email" placeholder="Введите email" id="email"  autocomplete="off">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label class="control-label" for="password">Пароль</label>
+                    <div class="input-wrap">
+                        <input type="password" name="password" placeholder="Введите пароль" id="password">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="control-label" for="password_verify">Подтверждение пароля</label>
+                    <div class="input-wrap">
+                        <input type="password" name="password_verify" placeholder="Подтвердите пароль" id="password_verify">
+                    </div>
+                </div>
+
+                <div class="button-panel">
+                    <input type="submit" class="button" id="submit_btn" title="Зарегистрироваться" value="Зарегистрироваться">
+                </div>
+        </form>
+        <div class="form-footer">
+            <p><a href="/admin/login">Есть аккаунт? Войти</a></p>
+        </div>
+    </div>
+</div>
+
+

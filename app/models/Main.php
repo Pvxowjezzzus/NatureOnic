@@ -1,6 +1,4 @@
 <?php
-
-
 namespace app\models;
 use app\controllers\MainController;
 use app\core\Model;
@@ -8,30 +6,22 @@ use app\core\View;
 
 class Main extends Model
 {
-    private array $cats = [
-        'fruits'=> 'Фрукты',
-        'vegies' => 'Овощи',
+    private array $cats = [ // Категории
         'nuts' => 'Орехи',
-        'berries' => 'Ягоды',
-        'shrooms' => 'Грибы',
-        'meat' => 'Мясная продукция',
+        'driedfruits' => 'Сухофрукты',
     ];
+   
     private array $review_data = [
-       'Имя', 'Email', 'Ваше сообщение',
-    ];
-    private array $valid = [
-        'invalid'=> [],
-        'data' => [],
-    ];
-    public function ItemCount($route) {
+        'Имя пользователя', 'Email', 'Ваше сообщение', 'Выбор продукции'
+     ];
 
-        if(isset($_GET['type'])) {
+    public function ItemCount($cat) { // Подсчет товаров
+
+        if(isset($_GET['type'])) 
+            $query = $this->db->column("SELECT COUNT(id) FROM products WHERE type = '" . $_GET['type'] . "' ");
+        else 
+            $query = $this->db->column("SELECT COUNT(id) FROM products WHERE category = '$cat'");
         
-            $query = $this->db->column("SELECT COUNT(id) FROM " . $route['cat'] . " WHERE type = '" . $_GET['type'] . "' ");
-        }
-        else {
-            $query = $this->db->column("SELECT COUNT(id) FROM " . $route['cat'] . " ");
-        }
         return $query;
     }
 
@@ -43,25 +33,25 @@ class Main extends Model
         return $this->cats[$cat];
     }
 
-    public function showItems($route)
-    {
+	public function showItems($route): array // Отображение товаров
+	{
         $max = 9;
         $params = [
             'max' => $max,
             'start' => ((($route['page'] ?: 1) - 1) * $max),
+            'category'=>$route['cat'],  
         ];
           if(!empty($_GET['type'])) {
-              $items = $this->db->row('SELECT * FROM '.$route['cat'] .'  WHERE type = "'.$_GET['type'].'" '.$this->sortby($_GET).' LIMIT :start, :max', $params);
+              $items = $this->db->row('SELECT * FROM products  WHERE category = :category AND type = "'.$_GET['type'].'" '.$this->sortby($_GET).' LIMIT :start, :max', $params);
           }
           else {
-              $items = $this->db->row('SELECT * FROM ' . $route['cat'].' '.$this->sortby($_GET).' LIMIT :start, :max', $params);
+              $items = $this->db->row('SELECT * FROM  products WHERE  category = :category '.$this->sortby($_GET).' LIMIT :start, :max', $params);
           }
-            foreach ($items as &$val) {
-              $val['country'] = mb_convert_case($val['country'], MB_CASE_TITLE);
-            }
-            return $items;
-    }
-    public function sortby($get) {
+        return $items;
+	}
+
+
+    public function sortby($get) { // Сортировка по разным параметрам
         $dir = mb_convert_case($get['dir'], MB_CASE_UPPER);
          if(empty($get['by'] && $dir)) {
              return 'ORDER BY id DESC';
@@ -72,7 +62,7 @@ class Main extends Model
 
 
 
-    public function direction(): string
+    public function direction(): string // Направление
     {
         if(empty($_GET))
             return 'asc';
@@ -89,47 +79,43 @@ class Main extends Model
         $params = [
             'cat' => $route['cat'],
         ];
-        return $this->db->query('SELECT * FROM varietes WHERE category = :cat ', $params);
+        return $this->db->query('SELECT * FROM varietes WHERE category = :cat', $params);
     }
 
     public function get_type($get) {
         $params = [
             'alias' => $get,
         ];
-        $type = $this->db->row('SELECT name FROM varietes WHERE alias = :alias ', $params);
+        $type = $this->db->row('SELECT name FROM varietes WHERE alias = :alias', $params);
         foreach($type as $val) {
             return "&laquo;".$val['name']."&raquo;";
         }
+        return false;
     }
 
     public function get_description($route) {
         switch($route['cat']) {
-            case 'vegies':
-                $desc = "Категория «Овощи» на сайте «АГРИНОВА»";
-                break;
-            
-            case 'fruits':
-                $desc = "Категория «Фрукты» на сайте «АГРИНОВА»";
+
+            case 'dried-fruits':
+                $desc = "Каталог «Сухофрукты» на сайте «Натуроник»";
                  break;
 
             case 'nuts':
-                $desc = "Категория «Орехи» на сайте «АГРИНОВА»";
+                $desc = "Каталог «Орехи» на сайте «Натуроник»";
                 break;
 
-
-            case 'meat':
-                $desc = "Категория «Мясная продукция» на сайте «АГРИНОВА»";
-                break;
-            
             default: 
-                $desc = 'Каталог товаров компании «АГРИНОВА»';
+                $desc = 'Каталог товаров компании «Натуроник»';
                 break;
 
         }
         return $desc;
     }
+    public function products(){
+       return $this->db->row('SELECT name FROM products ORDER BY name');
+    }
 
-    public function valid_support($post) {
+    public function valid_request($post) {
         $val = array_values($post);
         if(!$this->array_pass($post)) {
             $this->error =  array("all","Все поля пусты");
@@ -138,18 +124,18 @@ class Main extends Model
 	    $this->cycle_check($post, $val, 0);
         if(!empty($this->valid['invalid'])) {
             $this->error = array(implode(',',$this->valid['invalid']),
-                (array_count_values($this->valid['invalid']) > 1 ? 'Не заполнены поля: ' : 'Не заполнено поле: ').implode(", ", $this->valid['data']));
+                (count($this->valid['invalid']) > 1 ? 'Не заполнены поля: ' : 'Не заполнено поле: ').implode(", ", $this->valid['data']));
             return false;
         }
-	        $this->cycle_check($post, $val, 1);
-	        if(!empty($this->valid['invalid'])) {
-					$this->error = array(implode(',',$this->valid['invalid']),
-						(count($this->valid['invalid']) > 1 ? 'Ошибки в полях: ' : 'Ошибка в поле: ').implode(", ", $this->valid['data']));
-						return false;
-				}
+        $this->cycle_check($post, $val, 1);
+        if(!empty($this->valid['invalid'])) {
+            $this->error = array(implode(',',$this->valid['invalid']),
+                (count($this->valid['invalid']) > 1 ? 'Ошибки в полях: ' : 'Ошибка в поле: ').implode(", ", $this->valid['data']));
+            return false;
+        }
         return  true;
     }
-
+   
     public function cycle_check($array,$value, $mode): bool
     {
         $input = array_combine(array_keys($array), $this->review_data);
@@ -167,6 +153,7 @@ class Main extends Model
         return true;
     }
 
+
     public function preg_value($data, $value): bool
     {
 
@@ -174,22 +161,22 @@ class Main extends Model
 
         switch ($data) {
             case 'username':
-                if(!preg_match("/^(([a-zA-Z ]{5,30})|([а-яА-ЯЁёІіЇї ]{5,30}))$/u",  $val)) {
-	                $this->error = '«Имя» должно состоять из русских или латинских букв от 5 до 30 символов';
+                if(!preg_match("/^(([a-zA-Z ]{3,30})|([а-яА-ЯЁёІіЇї ]{3,30}))$/u",  $val)) {
+	                $error = '«Имя» должно состоять из русских или латинских букв от 3 до 30 символов';
                 }
                $this->annotation[] = $this->review_data[0]; // Название поля
                 break;
 
             case 'email':
                 if(!preg_match("/([a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9])/",$val)) {
-                    $this->error = 'Неправильный формат эл.почты';
+                    $error = 'Неправильный формат эл.почты';
                 }
 	            $this->annotation[] = $this->review_data[1];
 	            break;
 
             case 'message':
                 if(iconv_strlen($val) < 25 || iconv_strlen($val) > 1000) {
-	                $this->error = 'Диапазон символов сообщения от 25 до 1000 символов';
+	                $error = 'Диапазон символов сообщения от 25 до 1000 символов';
                 }
                 if(empty($val))
                 {
@@ -197,8 +184,15 @@ class Main extends Model
 	                $this->annotation[] = $str;
                 }
 
-                else
-	                $this->annotation[] = $this->review_data[2]; // Название поля
+                else 
+	            $this->annotation[] = $this->review_data[2]; // Название поля
+                break;
+
+            case 'product':
+                if(empty($val)) {
+                   $error = 'Вы не выбрали продукт';
+                }
+                $this->annotation[ ] = $this->review_data[3];
                 break;
 
             default: $error = 'Ошибка проверки';
@@ -208,26 +202,39 @@ class Main extends Model
 	    	array_push($this->annotation, 'empty');
 		    return true;
 	    }
-		if(!empty($this->error)) {
+		if(!empty($error)) {
+		    $this->error = $error;
 			return false;
 		}
 	    array_push($this->annotation, 'valid');
         return true;
     }
 
-	public function send_report($post)
+	public function send_request($post)
 	{
 		$params =[
 			'id'=> null,
 			'username'=>$this->pure($post['username'], ENT_QUOTES),
 			'email'=>$this->pure($post['email'], ENT_QUOTES),
+            'product'=>$this->pure($post['product'], ENT_NOQUOTES),
 			'message'=>$this->pure($post['message'], ENT_NOQUOTES),
-			'created_at' => date("Y-m-d H:i:s"),
+			'created_at' => date("Y-m-d H:i"),
 			'checked' => 0,
 		];
-		$this->db->query("INSERT INTO support_messages VALUES (:id,:username, :email, :message, :created_at,:checked)",$params);
+		$this->db->query("INSERT INTO requests VALUES (:id,:username, :email, :product, :message, :created_at,:checked)",$params);
 		return true;
     }
 
+    public function sendMessage($post) {
+        $message = "Добрый день, ".$post['username']." Вы отправили заявку на сайт Натуроник";
+        $to = "".$post['email']."";
+        $from = "natureonic@yandex.ru";
+        $subject = "Заявка на сайте Натуроник";
+        $subject = "?utf-8?B?".base64_encode($subject)."?=";
+        $headers = "From: $from\r\nReply-to: $from\r\nContent-Type:
+        text/plain; charset=utf-8\r\n";
+        mail($to, $subject, $message, $headers);
+    }
 
 }
+?>

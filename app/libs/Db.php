@@ -46,10 +46,7 @@ protected $db;
         return $result->fetchColumn();
     }
 
-    public function lastInsertId() {
-        return $this->db->lastInsertId();
-    }
-    public function quote($str) {
-        return $this->db->quote($str);
-    }
+
+
 }
+?>

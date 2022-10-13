@@ -6,7 +6,7 @@ namespace app\libs;
 
 class Pagination
 {
-    private $max = 6;
+    private $max = 9;
     private $route;
     private $index = '';
     public $current_page;
@@ -26,7 +26,7 @@ class Pagination
     public function get() {
         $links = null;
         $limits = $this->limits();
-        $html = '<div class="page-container middle"><div class="pagination"><ul>';
+        $html = '<div class="page-container middle"><div class="pagination">';
         for ($page = $limits[0]; $page <= $limits[1]; $page++) {
             if ($page == $this->current_page) {
                 $links .= '<li><span>'.$page.'</span></li>';
@@ -61,12 +61,12 @@ class Pagination
             $text = $page;
         }
         if($this->route['controller'] =='admin') {
-            $link = '<li><a  href="/'.$this->route['controller'].'/'.$this->route['action'].'?cat='.$_GET['cat'].'&page='.$page.'">'.$text.'</a></li>';
+            $link = '<li class="page-item" ><a class="page-link" href="/'.$this->route['controller'].'/'.$this->route['action'].'?page='.$page.'">'.$text.'</a></li>';
         }
         elseif(isset($_GET['type']))
-            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.'?type='.$_GET['type'].$this->check_sorting().'">'.$text.'</a></li>';
+            $link = '<li class="page-item active" ><a class="page-link" href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.'?type='.$_GET['type'].$this->check_sorting().'">'.$text.'</a></li>';
         else
-            $link = '<li><a  href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.$this->check_sorting().'">'.$text.'</a></li>';
+            $link = '<li class="page-item"><a class="page-link" href="/'.$this->route['action'].'/'.$this->route['cat'].'/'.$page.$this->check_sorting().'">'.$text.'</a></li>';
 
         return $link;
     }
@@ -109,3 +109,4 @@ class Pagination
         return ceil($this->total / $this->limit);
     }
 }
+?>
